@@ -1,14 +1,15 @@
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> 
     <title>Posts</title>
 </head>
 <body>
-    <form method="GET" action="{% url 'post_list' %} " style="padding: 30px">
+    <form class="table1" method="GET" action="{% url 'post_list' %} ">
         <select name="field" id="field">
             <option value="person">По имени пользователя</option>
             <option value="title">По теме</option>

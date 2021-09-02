@@ -5,3 +5,4 @@ from post.views import PostListView
 urlpatterns = [
     url(r"^posts/", PostListView.as_view(), name="post_list")
 ]
+
