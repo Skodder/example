@@ -1,1 +1,1 @@
-from .person_parser import *
+from .parser import *

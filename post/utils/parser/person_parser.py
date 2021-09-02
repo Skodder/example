@@ -3,7 +3,7 @@ from post.models import Person, Company, Addres
 
 class PersonParser:
 
-    def __init__(self, fields) -> None:
+    def __init__(self, fields: dict) -> None:
         self._fields = fields
 
     def parse(self):

@@ -1,4 +1,4 @@
-from post.models import Person, Addres, Company
+from post.models import Person, Addres, Company, Post
 from django.contrib import admin
 
 
@@ -14,4 +14,8 @@ class AdressAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
     pass

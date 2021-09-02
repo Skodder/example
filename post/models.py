@@ -77,3 +77,18 @@ class Person(PostMixin):
     class Meta:
         verbose_name = "Персона"
         verbose_name_plural = "Персоны"
+
+
+class Post(PostMixin):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, 
+                               related_name="posts")
+    title = models.CharField(verbose_name="Заголовок", max_length=100)
+    body = models.TextField(verbose_name="Текст")
+    
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = "Пост"
+        verbose_name_plural = "Посты"
+        

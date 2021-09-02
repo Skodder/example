@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand, CommandError
 from post.models import Person, Company, Addres
-from post.utils import PersonParser
+from post.utils import PersonParser, PostParser
 import urllib.request, json 
  
     
@@ -14,12 +14,8 @@ class Command(BaseCommand):
         person_parser.parse()
 
         posts_json = self.get_json("http://jsonplaceholder.typicode.com/posts")
-     
-        # получаешь json
-        # превращаешь его в какой-то объект(словарь, json)
-        # передаешь его парсеру, он там сделает все в бд
-
-        pass
+        post_parser = PostParser(posts_json)
+        post_parser.parse()
 
     def get_json(self, url: str):
         """Получить json объект с переданного адреса."""
