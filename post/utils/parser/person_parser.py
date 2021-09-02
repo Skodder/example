@@ -2,8 +2,15 @@ from post.models import Person, Company, Addres
 
 
 class PersonParser:
-
+    """Парсер людей."""
+    
     def __init__(self, fields: dict) -> None:
+        """Конструктор парсера
+
+        Args:
+            fields (dict): словарь который содержит ключи,
+            которые соответствуют полям класса `Person`
+        """
         self._fields = fields
 
     def parse(self):

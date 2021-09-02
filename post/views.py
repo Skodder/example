@@ -14,10 +14,13 @@ class PostListView(ListView):
         qs = self.model.objects.all()
         request = self.request
         get_data = request.GET.copy()
+        
+        # выбор поля по которому будет происходить фильтрация
         current_field = get_data.get("field", None)
         if current_field is None:
             return qs
-
+        
+        # значение по которому происходит фильтрация 
         request_value = get_data.get("value", "NONE")
         if current_field == self.PERSON_FIELD:
             return qs.filter(person__name__icontains=request_value)
