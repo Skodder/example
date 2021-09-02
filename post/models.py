@@ -1,7 +1,35 @@
 from django.db import models
 
+class PostMixin(models.Model):
+    class Meta:
+        abstract = True
 
-class Addres(models.Model):
+    @classmethod
+    def get_instance_by_id(cls, id):
+        """Получить инстанс по ИД.
+        Если инстанса с таким ИД не существует, то вернется новый,
+        у которого еще не вызывался метод `save`
+        Args:
+            id (int): ИД
+        Returns:
+            Product: Инстанс модели
+        """
+        qs = cls.objects.filter(id=id)
+        if qs.exists():
+            return qs.first()
+        return cls(id=id)
+
+    def insert_fields(self, fields: dict):
+        """Заполнить поля товара из переданног словаря.
+        Args:
+            obj (Proudct): Инстанс модели
+            fields (dict): Словарь полей
+        """
+        self.__dict__.update(fields)
+        self.save()
+
+
+class Addres(PostMixin):
     street = models.CharField(verbose_name="Улица", max_length=150)
     suite = models.CharField(max_length=500)
     city = models.CharField(verbose_name="Город", max_length=100)
@@ -20,9 +48,9 @@ class Addres(models.Model):
     def __str__(self) -> str:
         return self.full_address
 
-class Company(models.Model):
+class Company(PostMixin):
     name = models.CharField(verbose_name="Название", max_length=100)
-    cathPhrase = models.CharField(verbose_name="Слоган", max_length=500)
+    catch_phrase = models.CharField(verbose_name="Слоган", max_length=500)
     bs = models.CharField(max_length=500)
 
     def __str__(self) -> str:
@@ -32,7 +60,7 @@ class Company(models.Model):
         verbose_name = "Компания"
         verbose_name_plural = "Компании"
 
-class Person(models.Model):
+class Person(PostMixin):
     name = models.CharField(verbose_name="ФИО", max_length=200)
     username = models.CharField(verbose_name="Логин", max_length=30, unique=True)
     email = models.CharField(verbose_name="Email", max_length=40, unique=True)
