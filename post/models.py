@@ -12,7 +12,7 @@ class PostMixin(models.Model):
         Args:
             id (int): ИД
         Returns:
-            Product: Инстанс модели
+            Инстанс модели
         """
         qs = cls.objects.filter(id=id)
         if qs.exists():
@@ -22,8 +22,8 @@ class PostMixin(models.Model):
     def insert_fields(self, fields: dict):
         """Заполнить поля товара из переданног словаря.
         Args:
-            obj (Proudct): Инстанс модели
-            fields (dict): Словарь полей
+            obj : Инстанс модели
+            fields : Словарь полей
         """
         self.__dict__.update(fields)
         self.save()
