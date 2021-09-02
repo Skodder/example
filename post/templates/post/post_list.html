@@ -1,0 +1,36 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> 
+    <title>Posts</title>
+</head>
+<body>
+    <form class="table1" method="GET" action="{% url 'post_list' %} ">
+        <select name="field" id="field">
+            <option value="person">По имени пользователя</option>
+            <option value="title">По теме</option>
+            <option value="body">По тексту</option>
+        </select>
+        <input type="text" name="value">
+        <input type="submit" value="Поиск">
+    </form>
+    <table border="1" width="100%" cellpadding="5">
+        <tr>
+            <th>Имя пользователя</th>
+            <th>Тема поста</th>
+            <th>Текст поста</th>
+        </tr>
+        {% for post in object_list %}
+            <tr>
+                <th>{{ post.person.name }}</th>
+                <th>{{ post.title }}</th>
+                <th>{{ post.body }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
