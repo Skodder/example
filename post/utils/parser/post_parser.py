@@ -3,10 +3,24 @@ from post.models import Post, Person
 
 class PostParser:
 
+
     def __init__(self, fields: dict) -> None:
+        """Конструктор парсера
+
+        Args:
+            fields (dict): словарь который содержит ключи,
+            которые соответствуют полям класса `Post`
+        """
         self._fields = fields
 
     def parse(self):
+        """Запустить парсер массива словарей, 
+        переданного в конструкторе
+
+        Raises:
+            TypeError: В случае если объект класса Person не был найден
+            по переданному id.
+        """
         for element in self._fields:
             person_id = element.pop("userId", None)
             person = self.get_person(person_id)
